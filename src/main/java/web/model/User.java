@@ -21,7 +21,8 @@ public class User {
     @Column
     private String email;
 
-    public User(){}
+    public User() {
+    }
 
     public User(String firstName, String lastName, int age, String email) {
         this.firstName = firstName;

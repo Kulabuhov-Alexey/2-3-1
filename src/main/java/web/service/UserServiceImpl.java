@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 import web.dao.UserDAO;
 import web.model.User;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
