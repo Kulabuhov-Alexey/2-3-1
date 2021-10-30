@@ -34,5 +34,9 @@
 </table>
 <br>
 <input type="button" value="Add" onclick="window.location.href = 'addNewUser'">
+<a href="javascript: document.logoutForm.submit()" role="menuitem"> Logout</a>
+<form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+    <input hidden type="submit" value="Sign Out"/>
+</form>
 </body>
 </html>
