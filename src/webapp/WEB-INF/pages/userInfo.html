@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>User</h1>
-<form action="#" th:action="@{/saveUser}" th:object="${user}" method="post">
+<form action="#" th:action="@{/admin/saveUser}" th:object="${user}" method="post">
     <input type="hidden" th:field="*{id}"/>
     <p>Firstname: <input type="text" th:field="*{firstName}"/></p>
     <p>Lastname: <input type="text" th:field="*{lastName}"/></p>
@@ -21,7 +21,7 @@
                    th:id="${role.id}"
                    th:name="${role}"
                    th:value="${role.id}"
-                   th:checked="${#sets.contains(user.roles, role)}"
+                   th:checked="${user.roles} != null ? ${#sets.contains(user.roles, role)} : false"
             />
             <label th:for="${role.id}" th:text="${role.role}"></label>
         </li>

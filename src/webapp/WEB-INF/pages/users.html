@@ -22,10 +22,10 @@
             <td th:text="${user.age}"></td>
             <td th:text="${user.email}"></td>
             <td>
-                <a th:href="@{/updateInfo(userId=${user.id})}">
+                <a th:href="@{/admin/updateInfo(userId=${user.id})}">
                     <button type="button">Update</button>
                 </a>
-                <a th:href="@{/deleteUser(userId=${user.id})}">
+                <a th:href="@{/admin/deleteUser(userId=${user.id})}">
                     <button type="button">Delete</button>
                 </a>
             </td>
@@ -33,7 +33,7 @@
     </th:block>
 </table>
 <br>
-<input type="button" value="Add" onclick="window.location.href = 'addNewUser'">
+<input type="button" value="Add" onclick="window.location.href = 'admin/addNewUser'">
 <a href="javascript: document.logoutForm.submit()" role="menuitem"> Logout</a>
 <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
     <input hidden type="submit" value="Sign Out"/>

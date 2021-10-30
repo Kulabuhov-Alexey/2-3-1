@@ -26,7 +26,7 @@ public class UserController {
         this.roleService = roleService;
     }
 
-    @RequestMapping(value = "/")
+    @RequestMapping(value = {"/", "/admin"})
     public String getAllUsers(Model model) {
 
         List<User> allUsers = userService.getAllUsers();
@@ -34,7 +34,7 @@ public class UserController {
         return "users";
     }
 
-    @RequestMapping(value = "/addNewUser")
+    @RequestMapping(value = "/admin/addNewUser")
     public ModelAndView addNewUser() {
         ModelAndView modelAndView = new ModelAndView("userInfo");
         User user = new User();
@@ -44,7 +44,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @PostMapping("/saveUser")
+    @PostMapping("/admin/saveUser")
     public String saveUser(@ModelAttribute("user") User user,
                            @RequestParam Map<String, String> form) {
         user.setRoles(roleService.getRolesFromForm(roleService.getAllRoles(), form));
@@ -52,8 +52,7 @@ public class UserController {
         return "redirect:/";
     }
 
-    @GetMapping("/updateInfo")
-//    @PreAuthorize("#userId == authentication.principal.userId or hasAuthority('ADMIN')")
+    @GetMapping(value = {"/admin/updateInfo","/updateInfo"})
     @PreAuthorize("#id == authentication.principal.id or hasAuthority('ROLE_ADMIN')")
     public ModelAndView updateUser(@RequestParam("userId") Long id, Principal principal) {
         ModelAndView modelAndView = new ModelAndView("userInfo");
@@ -64,7 +63,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @GetMapping("/deleteUser")
+    @GetMapping("/admin/deleteUser")
     public String deleteUser(@RequestParam("userId") Long id) {
         userService.deleteUser(id);
         return "redirect:/";

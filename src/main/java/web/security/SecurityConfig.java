@@ -32,14 +32,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // http.csrf().disable(); - попробуйте выяснить сами, что это даёт
         http.authorizeRequests()
-//                .antMatchers("/").permitAll() // доступность всем
-                .antMatchers("/", "/addNewUser", "/saveUser", "/deleteUser").access("hasAnyRole('ROLE_ADMIN')") // разрешаем входить на /user пользователям с ролью User
-                .antMatchers(HttpMethod.GET, "/updateInfo").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')") // разрешаем входить на /user пользователям с ролью User
-//                .antMatchers("/**").authenticated() // разрешаем входить на /user пользователям с ролью User
-                .and().formLogin()  // Spring сам подставит свою логин форму
-                .successHandler(successUserHandler); // подключаем наш SuccessHandler для перенеправления по ролям
+                .antMatchers("/", "/admin/**").access("hasAnyRole('ROLE_ADMIN')")
+                .antMatchers(HttpMethod.GET, "/updateInfo").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
+                .and().formLogin()
+                .successHandler(successUserHandler);
     }
 
     // Необходимо для шифрования паролей
